@@ -22,16 +22,30 @@ package c4.conarm.integrations.jei;
 import c4.conarm.common.ConstructsRegistry;
 import c4.conarm.lib.ArmoryRegistry;
 import c4.conarm.lib.armor.ArmorCore;
-import mezz.jei.api.IModPlugin;
-import mezz.jei.api.ISubtypeRegistry;
+import c4.conarm.lib.materials.ArmorMaterialType;
+import mezz.jei.api.*;
+import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import slimeknights.tconstruct.library.TinkerRegistry;
+import slimeknights.tconstruct.library.materials.MaterialTypes;
 import slimeknights.tconstruct.plugin.jei.interpreter.TableSubtypeInterpreter;
 import slimeknights.tconstruct.plugin.jei.interpreter.ToolSubtypeInterpreter;
+import slimeknights.tconstruct.plugin.jei.material.HarvestCategory;
+import slimeknights.tconstruct.plugin.jei.material.MaterialWrapper;
+import slimeknights.tconstruct.plugin.jei.material.Reference;
+import slimeknights.tconstruct.tools.TinkerTools;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @mezz.jei.api.JEIPlugin
 public class JEIPlugin implements IModPlugin {
+    public static final List<String> PARTS = Arrays.asList(ArmorMaterialType.CORE, ArmorMaterialType.PLATES, ArmorMaterialType.TRIM);
+    public static IJeiHelpers jeiHelpers;
 
     @Override
     public void registerItemSubtypes(@Nonnull ISubtypeRegistry registry) {
@@ -44,5 +58,31 @@ public class JEIPlugin implements IModPlugin {
         }
 
         registry.registerSubtypeInterpreter(Item.getItemFromBlock(ConstructsRegistry.armorForge), tableInterpreter);
+    }
+
+    @Override
+    public void registerCategories(@Nonnull IRecipeCategoryRegistration registry) {
+        final IJeiHelpers jeiHelpers = registry.getJeiHelpers();
+        final IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
+
+        registry.addRecipeCategories(new ArmorCategory(guiHelper, PARTS));
+    }
+
+    @Override
+    public void register(@Nonnull IModRegistry registry) {
+        jeiHelpers = registry.getJeiHelpers();
+        IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
+
+        List<MaterialWrapper> materialWrappers = TinkerRegistry.getAllMaterials().stream()
+                .filter(material -> !material.isHidden() && material.hasItems() && !material.getAllStats().isEmpty())
+                .map(MaterialWrapper::new).collect(Collectors.toList());
+
+        ArmorCategory armorCategory = new ArmorCategory(guiHelper, PARTS);
+        List<MaterialWrapper> armorWrapper = materialWrappers.stream()
+                .filter(materialWrapper -> PARTS.stream().anyMatch(type -> materialWrapper.getMaterial().hasStats(type)))
+                .collect(Collectors.toList());
+        registry.addRecipes(armorWrapper, armorCategory.getUid());
+        registry.addRecipeCatalyst(new ItemStack(ConstructsRegistry.armorForge, 1), armorCategory.getUid());
+        registry.addRecipeCatalyst(new ItemStack(ConstructsRegistry.armorStation, 1), armorCategory.getUid());
     }
 }
