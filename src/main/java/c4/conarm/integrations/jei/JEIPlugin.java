@@ -28,16 +28,11 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import slimeknights.tconstruct.library.TinkerRegistry;
-import slimeknights.tconstruct.library.materials.MaterialTypes;
 import slimeknights.tconstruct.plugin.jei.interpreter.TableSubtypeInterpreter;
 import slimeknights.tconstruct.plugin.jei.interpreter.ToolSubtypeInterpreter;
-import slimeknights.tconstruct.plugin.jei.material.HarvestCategory;
 import slimeknights.tconstruct.plugin.jei.material.MaterialWrapper;
-import slimeknights.tconstruct.plugin.jei.material.Reference;
-import slimeknights.tconstruct.tools.TinkerTools;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;

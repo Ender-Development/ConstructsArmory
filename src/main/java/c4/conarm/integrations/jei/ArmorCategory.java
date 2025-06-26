@@ -13,7 +13,6 @@ import slimeknights.tconstruct.plugin.jei.material.MaterialWrapper;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
