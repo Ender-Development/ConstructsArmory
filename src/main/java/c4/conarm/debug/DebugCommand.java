@@ -20,6 +20,7 @@
 package c4.conarm.debug;
 
 import c4.conarm.ConstructsArmory;
+import c4.conarm.Tags;
 import c4.conarm.common.armor.utils.ArmorHelper;
 import c4.conarm.lib.armor.ArmorCore;
 import com.google.common.collect.Lists;
@@ -39,7 +40,7 @@ import java.util.List;
 public class DebugCommand extends CommandBase {
 
     public DebugCommand(){
-        aliases = Lists.newArrayList(ConstructsArmory.MODID, "DB", "db");
+        aliases = Lists.newArrayList(Tags.MOD_ID, "DB", "db");
     }
 
     private final List<String> aliases;

@@ -20,6 +20,7 @@
 package c4.conarm.lib.book;
 
 import c4.conarm.ConstructsArmory;
+import c4.conarm.Tags;
 import c4.conarm.lib.book.content.ContentArmor;
 import c4.conarm.lib.book.content.ContentArmorMaterial;
 import c4.conarm.lib.book.content.ContentArmorModifier;
@@ -38,7 +39,7 @@ import slimeknights.mantle.client.book.repository.FileRepository;
 @SideOnly(Side.CLIENT)
 public class ArmoryBook extends BookData {
 
-    public final static BookData INSTANCE = BookLoader.registerBook(ConstructsArmory.MODID, false, false);
+    public final static BookData INSTANCE = BookLoader.registerBook(Tags.MOD_ID, false, false);
 
     public static void init() {
         BookLoader.registerPageType(ContentArmorMaterial.ID, ContentArmorMaterial.class);

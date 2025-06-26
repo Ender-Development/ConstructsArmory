@@ -20,6 +20,7 @@
 package c4.conarm.lib.capabilities;
 
 import c4.conarm.ConstructsArmory;
+import c4.conarm.Tags;
 import com.google.common.collect.Maps;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +47,7 @@ public class ArmorAbilityHandler {
     public void attachCapabilities(AttachCapabilitiesEvent<Entity> evt) {
 
         if (evt.getObject() instanceof EntityPlayer) {
-            evt.addCapability(new ResourceLocation(ConstructsArmory.MODID, "armor_abilities"), new Provider());
+            evt.addCapability(new ResourceLocation(Tags.MOD_ID, "armor_abilities"), new Provider());
         }
     }
 

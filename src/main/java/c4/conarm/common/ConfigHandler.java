@@ -20,6 +20,7 @@
 package c4.conarm.common;
 
 import c4.conarm.ConstructsArmory;
+import c4.conarm.Tags;
 import c4.conarm.integrations.tinkertoolleveling.ConfigSyncLevelingPacket;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.config.Config;
@@ -30,7 +31,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import slimeknights.tconstruct.common.TinkerNetwork;
 
-@Config(modid = ConstructsArmory.MODID)
+@Config(modid = Tags.MOD_ID)
 public class ConfigHandler {
 
     @Config.Name("Spawn With Book")
@@ -73,13 +74,13 @@ public class ConfigHandler {
         public float damageToXP = 0.25f;
     }
 
-    @Mod.EventBusSubscriber(modid = ConstructsArmory.MODID)
+    @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
     private static class ConfigEventHandler {
 
         @SubscribeEvent
         public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent evt) {
-            if (evt.getModID().equals(ConstructsArmory.MODID)) {
-                ConfigManager.sync(ConstructsArmory.MODID, Config.Type.INSTANCE);
+            if (evt.getModID().equals(Tags.MOD_ID)) {
+                ConfigManager.sync(Tags.MOD_ID, Config.Type.INSTANCE);
             }
         }
 

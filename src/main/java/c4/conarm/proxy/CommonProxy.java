@@ -20,6 +20,7 @@
 package c4.conarm.proxy;
 
 import c4.conarm.ConstructsArmory;
+import c4.conarm.Tags;
 import c4.conarm.client.utils.GuiHandler;
 import c4.conarm.common.ConstructsRegistry;
 import c4.conarm.common.RepairRecipe;
@@ -163,7 +164,7 @@ public class CommonProxy {
 
                 TableRecipeFactory.TableRecipe recipe =
                         new TableRecipeFactory.TableRecipe(
-                                new ResourceLocation(ConstructsArmory.MODID, "armorforge"),
+                                new ResourceLocation(Tags.MOD_ID, "armorforge"),
                                 new OreIngredient(oredict),
                                 new ItemStack(ConstructsRegistry.armorForge),
                                 CraftingHelper.parseShaped("BBB", "MTM", "M M",

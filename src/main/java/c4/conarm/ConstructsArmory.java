@@ -23,28 +23,15 @@ import c4.conarm.debug.DebugCommand;
 import c4.conarm.integrations.tinkertoolleveling.CommandLevelArmor;
 import c4.conarm.integrations.tinkertoolleveling.ModArmorLeveling;
 import c4.conarm.proxy.CommonProxy;
-import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
-@Mod(   modid = ConstructsArmory.MODID,
-        name = ConstructsArmory.MODNAME,
-        version = ConstructsArmory.MODVER,
-        dependencies =  "required-after:forge@[14.23.4.2745,);" +
-                        "required-after:mantle@[1.12-1.3.1,);" +
-                        "required-after:tconstruct@[1.12.2-2.13.0.171,);" +
-                        "after:contenttweaker@(1.12.2-4.7.0,);" +
-                        "after:crafttweaker@[1.12-4.1.20.564,)",
-        acceptedMinecraftVersions = "[1.12.2, 1.13)",
-        certificateFingerprint = "@FINGERPRINT@")
+@Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION, dependencies =  ConstructsArmory.DEPS, acceptedMinecraftVersions = ConstructsArmory.MCVER)
 public class ConstructsArmory {
-
-    public static final String MODID = "conarm";
-    public static final String MODNAME = "Construct's Armory";
-    public static final String MODVER = "1.2.5.10";
+    public static final String MCVER = "[1.12.2, 1.13)";
+    public static final String DEPS = "required-after:mantle@[1.12-1.3.3.55,);required-after:tconstruct@[1.12.2-2.13.0.201,);after:contenttweaker@[1.12.2-4.10.0,);after:crafttweaker@[1.12-4.1.20.704,)";
 
     private static final boolean DEBUG = false;
 
@@ -70,11 +57,6 @@ public class ConstructsArmory {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent evt) {
         proxy.postInit(evt);
-    }
-
-    @Mod.EventHandler
-    public void onFingerPrintViolation(FMLFingerprintViolationEvent evt) {
-        FMLLog.log.log(Level.ERROR, "Invalid fingerprint detected! The file " + evt.getSource().getName() + " may have been tampered with. This version will NOT be supported by the author!");
     }
 
     @Mod.EventHandler
